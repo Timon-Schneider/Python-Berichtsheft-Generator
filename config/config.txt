@@ -1,0 +1,8 @@
+[config]
+TemplateEntriesPerDay=8
+fontname=Times-Roman
+fontsize=12
+workdays=["monday", "tuesday", "wednesday", "thursday", "friday"]
+freedays=["saturday", "sunday"]
+FreeDaysText=Frei
+schooldaysText=Berufsschule
