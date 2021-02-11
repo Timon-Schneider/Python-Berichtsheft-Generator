@@ -16,7 +16,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-from setuptools import setup, find_packages
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
+import py2exe, sys
+
+sys.argv.append('py2exe')
 
 def read(filename):
     filepath = os.path.join(os.path.dirname(__file__), filename)
@@ -24,8 +30,11 @@ def read(filename):
     return file.read()
 
 setup(
+    options = {'py2exe': {'bundle_files': 1, 'compressed': True}},
+    console = ["cli.py"],
+    zipfile = None,
     name="Python Berichtsheft Generator",
-    version="1.0.0",
+    version="1.0.1",
     description="generator for a portfolio needed in most german apprenticeships",
     long_description=read('README'),
     long_description_content_type="text/markdown",
@@ -38,7 +47,7 @@ setup(
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",
     ],
-    packages=find_packages(),
+    #packages=find_packages(),
     include_package_data=True,
     install_requires=[
         "PyMuPDF"

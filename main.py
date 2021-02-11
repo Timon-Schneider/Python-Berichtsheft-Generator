@@ -206,11 +206,16 @@ def main():
 
     try:
         with open('./tasks/tasks.txt', 'r') as tasksfile:
-            tasks = tasksfile.read().replace('\n', '').split(',')
+            tasks = tasksfile.read()
     except Exception:
         print("failed to open ./tasks/tasks.txt (missing or corrupted?)")
         input("Press [ENTER]: ")
         sys.exit("tasks file read error")
+
+    try:
+        tasks = tasks.encode('iso8859-1').decode('utf-8').replace('\n', '').split(',')
+    except:
+        tasks = tasks.replace('\n', '').split(',')
 
     try:
         with open('./holidays/holidays.txt', 'r') as holidaysfile:
@@ -366,6 +371,9 @@ def main():
     while True:
         try:
             EntriesPerDayMin = int(input("\nBitte Minimale Anzahl der Einträge pro Tag angeben \n(7 sieht bei der standard Vorlage am besten aus):"))
+            if EntriesPerDayMin > TemplateEntriesPerDay:
+                print("Die Zahl überschreitet die maximal mögliche Anzahl an Einträgen (siehe CONFIG und TEMPLATE)")
+                continue
         except ValueError:
             print("Keine ganze Zahl. Versuche es bitte erneut.")
             continue
@@ -375,6 +383,9 @@ def main():
     while True:
         try:
             EntriesPerDayMax = int(input("\nBitte Maximale Anzahl der Einträge pro Tag angeben \n(8 sieht bei der standard Vorlage am besten aus):"))
+            if EntriesPerDayMax > TemplateEntriesPerDay:
+                print("Die Zahl überschreitet die maximal mögliche Anzahl an Einträgen (siehe CONFIG und TEMPLATE)")
+                continue
         except ValueError:
             print("Keine ganze Zahl. Versuche es bitte erneut.")
             continue
