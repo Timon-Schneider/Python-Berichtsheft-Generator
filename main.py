@@ -105,7 +105,9 @@ def main():
             print("\nFertig! Bitte überprüfe die Datei (./schooldays/schooldays.txt) auf Fehler und entferne Einträge die in den Ferien oder Feiertagen liegen könnten.")
             while again not in ("j", "n"):
                 again = input(
-                    "\nSchultag-Generator erneut starten? [j/n]")
+                    '\nWenn du jetzt noch nicht alle Schultage eingetragen hast, könntest du den Schultag-Generator erneut starten.\n'
+                    'Antworte mit "j", wenn du das tun möchtest.\n'
+                    ' Wenn alle Schultage eingetragen sind antworte mit "n" um mit dem Berichtsheft-Generator fortzufahren. [j/n]')
                 if again == "n":
                     break
                 elif again == "j":
@@ -156,7 +158,9 @@ def main():
             again = None
             while again not in ("j", "n"):
                 again = input(
-                    "\nSchultag-Generator erneut starten? [j/n]")
+                    '\nWenn du jetzt noch nicht alle Schultage eingetragen hast, könntest du den Schultag-Generator erneut starten.\n'
+                    'Antworte mit "j", wenn du das tun möchtest.\n'
+                    ' Wenn alle Schultage eingetragen sind antworte mit "n" um mit dem Berichtsheft-Generator fortzufahren. [j/n]')
                 if again == "n":
                     break
                 elif again == "j":
@@ -164,9 +168,10 @@ def main():
                 else:
                     print("Bitte j oder n eingeben")
 
-
-    copyrightText = open("LICENSE", "r")
-    print(copyrightText.read())
+    with open("copyright_text", "r") as copyright_file:
+        for i in range(16):
+            line = next(copyright_file).strip()
+            print(line)
 
     config = configparser.ConfigParser()
     try:
@@ -204,6 +209,9 @@ def main():
         input("Press [ENTER]: ")
         sys.exit("template file read error")
 
+    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./tasks/tasks.txt" mindestens acht persönliche Ausbildungstätigkeiten enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
+    input("Mit [ENTER] bestätigen: ")
+
     try:
         with open('./tasks/tasks.txt', 'r') as tasksfile:
             tasks = tasksfile.read()
@@ -217,6 +225,9 @@ def main():
     except:
         tasks = tasks.replace('\n', '').split(',')
 
+    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./holidays/holidays.txt" die zu berücksichtigenden Urlaubstage und Feiertage enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
+    input("Mit [ENTER] bestätigen: ")
+
     try:
         with open('./holidays/holidays.txt', 'r') as holidaysfile:
             holidays = holidaysfile.read().replace('\n', ',').split(',')
@@ -229,6 +240,18 @@ def main():
 
     holidaysDates = holidays[::2]
     holidaysText = holidays[1::2]
+
+    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./schooldays/schooldays.txt" die zu berücksichtigenden Schultage enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
+    GenStart = None
+    while GenStart not in ("j", "n"):
+        GenStart = input(
+            '\nUM ZEIT ZU SPAREN KANN DIESES PROGRAMM DIE SCHULTAGE FÜR EINEN ANGEGEBENEN ZEITRAUM SELBST IN DIESE DATEI SCHREIBEN (SOWOHL FÜR WÖCHENTLICHEN UNTERRICHT ALS AUCH FÜR BLOCKUNTERRICHT). \nSOLL DAS PROGRAMM DIES ÜBERNEHMEN? [j/n]:')
+        if GenStart == "n":
+            break
+        elif GenStart == "j":
+            GenerateSchooldays()
+        else:
+            print("Bitte j oder n eingeben")
 
     try:
         with open('./schooldays/schooldays.txt', 'r') as schooldaysfile:
@@ -244,26 +267,6 @@ def main():
     for s in schooldays:
         holidaysText.append(schooldaysText)
     holidaysDates.append('1')
-
-    # print(holidaysText)
-    # print(holidaysDates)
-    # print (tasks)
-
-    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./tasks/tasks.txt" mindestens acht persönliche Ausbildungstätigkeiten enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
-    input("Mit [ENTER] bestätigen: ")
-    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./holidays/holidays.txt" die zu berücksichtigenden Urlaubstage und Feiertage enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
-    input("Mit [ENTER] bestätigen: ")
-    print('\n\nFür die korrekte Funktionsweise dieses Programmes ist es zwingend erforderlich, dass die Datei "./schooldays/schooldays.txt" die zu berücksichtigenden Schultage enthält. \nZur Überprüfung der Formatierung sind mehrere Einträge als Beispiel vorgegeben. Löschen Sie diese und tragen Sie in gleicher Form Ihre Eigenen ein.')
-    GenStart = None
-    while GenStart not in ("j", "n"):
-        GenStart = input(
-            '\nUM ZEIT ZU SPAREN KANN DIESES PROGRAMM DIE SCHULTAGE FÜR EINEN ANGEGEBENEN ZEITRAUM SELBST IN DIESE DATEI SCHREIBEN (SOWOHL FÜR WÖCHENTLICHEN UNTERRICHT ALS AUCH FÜR BLOCKUNTERRICHT). \nSOLL DAS PROGRAMM DIES ÜBERNEHMEN? [j/n]:')
-        if GenStart == "n":
-            break
-        elif GenStart == "j":
-            GenerateSchooldays()
-        else:
-            print("Bitte j oder n eingeben")
 
     try:
         forename = input("\nBitte Vornamen eingeben:")
@@ -353,6 +356,9 @@ def main():
         try:
             TrainingYearChange = int(input('\nBitte den Monat des Wechsels in das nächste Ausbildungsjahr angeben \nBsp.: "08" \n(auch angeben wenn '
                                  'der Wechsel nicht im vorher angegebenen Zeitraum liegt)\n:'))
+            if TrainingYearChange > 12:
+                print("Es gibt nicht mehr als 12 Monate. Bitte versuche es erneut")
+                continue
         except ValueError:
             print("Keine ganze Zahl. Versuche es bitte erneut.")
             continue
