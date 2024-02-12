@@ -1,3 +1,7 @@
+:warning: [NEUE, SCHNELLERE, BENUTZERFREUNDLICHERE VERSION](https://github.com/Timon-Schneider/easy-berichtsheft-generator) (mit grafischer Oberfläche) :warning:
+
+:warning: DIESE VERSION FUNKTIONIERT, WIRD ABER NICHT MEHR AKTUALISIERT. :warning:
+
 <h1 align="center">Python Berichtsheft Generator</h1>
 
 <p align="center">
@@ -115,7 +119,7 @@ Vorschläge werden gerne gesehen!
 ### Spenden
 <a href="https://www.paypal.com/donate?hosted_button_id=ULE8THN3EAHJL" target="_blank"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif" alt="Spenden per Paypal"></a>
 
-(Ja, Timon Schneider = MrMampalon)
+Timon Schneider
 
 ----
 
@@ -123,7 +127,7 @@ Vorschläge werden gerne gesehen!
 
 Python Berichtsheft Generator - generator for a portfolio needed in most german apprenticeships
 Copyright (C) 2021  Timon Schneider
-mail@timon-schneider.net
+mail@timon-schneider.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
